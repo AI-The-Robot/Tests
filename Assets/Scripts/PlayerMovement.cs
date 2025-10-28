@@ -10,6 +10,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
+    
+    //Gravity
+    private readonly float _gravity = -9.8f;
+    private float _velocity;
+    [SerializeField] private float gravityMultiplier = 3.0f;
 
     private void Awake()
     {
@@ -23,11 +28,26 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
+        ApplyGravity();
         CalculateDirection();
         RotatePlayer();
         MovePlayer();
     }
 
+    void ApplyGravity()
+    {
+        if (_controller.isGrounded &&  _velocity < 0.0f)
+        {
+            _velocity = -1f;
+        }
+        else
+        {
+            _velocity += _gravity * gravityMultiplier * Time.deltaTime;
+        }
+        
+        _movDirection.y = _velocity;
+    }
+    
     void GetInput(float horizontal, float vertical)
     {
         _horizontal = horizontal;
