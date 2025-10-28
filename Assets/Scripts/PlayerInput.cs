@@ -14,8 +14,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        _horizontal = Input.GetAxisRaw("Horizontal");
-        _vertical = Input.GetAxisRaw("Vertical");
+        _horizontal = Input.GetAxis("Horizontal");
+        _vertical = Input.GetAxis("Vertical");
         OnMove?.Invoke(_horizontal, _vertical); 
         if (Input.GetButtonDown("Fire1")) OnAttack?.Invoke();
     }

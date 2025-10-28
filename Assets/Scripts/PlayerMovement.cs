@@ -63,15 +63,18 @@ public class PlayerMovement : MonoBehaviour
 
     void RotatePlayer()
     {
-        if (_input.sqrMagnitude == 0f) return; 
-        float targetAngle= Mathf.Atan2(_movDirection.x, _movDirection.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0, angle,0);
+        if (_input.sqrMagnitude >= 0.1f)
+        {
+            float targetAngle= Mathf.Atan2(_movDirection.x, _movDirection.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0, angle,0);
+        }
+        
     }
 
     void MovePlayer()
     {
-        if (_movDirection.magnitude >= 0.1f)
+        if (_input.sqrMagnitude >= 0.1f)
         {
             _controller.Move(_movDirection * (speed * Time.deltaTime));
         }
