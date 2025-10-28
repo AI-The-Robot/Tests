@@ -243,7 +243,6 @@ MonoBehaviour:
   attackMarchDistance: 10
   speed: 5
   turnSmoothTime: 0.1
-  turnSmoothVelocity: 0
 --- !u!1 &44238225
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +353,7 @@ GameObject:
   - component: {fileID: 693193572}
   - component: {fileID: 693193571}
   - component: {fileID: 693193574}
+  - component: {fileID: 693193575}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -479,6 +479,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &693193575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693193570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c7079bc9134c27936f3f277fd85771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 14084451}
+  offset: {x: 0, y: 10, z: 0}
+  smoothTime: 0
 --- !u!1 &766912716
 GameObject:
   m_ObjectHideFlags: 0
