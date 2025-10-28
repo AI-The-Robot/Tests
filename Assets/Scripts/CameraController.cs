@@ -6,13 +6,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float smoothTime;
-    
+    [SerializeField] private Transform player;
     private Vector3 _velocity = Vector3.zero;
     
 
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = player;
         offset = transform.position - target.position;
     }
 
