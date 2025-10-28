@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private float turnSmoothVelocity;
     
     //Gravity
-    private readonly float _gravity = -9.8f;
+    [Header("Gravity Settings")]
+    private readonly float _gravity = -9.81f;
     private float _velocity;
     [SerializeField] private float gravityMultiplier = 3.0f;
 
@@ -55,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CalculateDirection()
     {
-        _movDirection = new Vector3(_horizontal, 0,_vertical).normalized;
+        _movDirection = new Vector3(_horizontal, _movDirection.y,_vertical).normalized;
         
         
     }
