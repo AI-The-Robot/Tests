@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _movDirection;
     [SerializeField] private float attackMarchDistance;
     [SerializeField] private float speed;
+    [SerializeField] private float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         CalculateDirection();
+        RotatePlayer();
         MovePlayer();
     }
 
@@ -33,14 +36,19 @@ public class PlayerMovement : MonoBehaviour
 
     void CalculateDirection()
     {
-        Vector2 direction = new Vector2(_horizontal, _vertical);
-        _movDirection = new Vector3(direction.x, 0, direction.y).normalized;
+        _movDirection = new Vector3(_horizontal, 0,_vertical).normalized;
+        
         
     }
 
     void RotatePlayer()
     {
-        
+        if (_movDirection.magnitude >= 0.1f)
+        {
+            float targetAngle= Mathf.Atan2(_movDirection.x, _movDirection.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0, angle,0);
+        }
     }
 
     void MovePlayer()
