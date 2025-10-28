@@ -240,9 +240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adbcf368569b0f342a235b4accb39c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackMarchDistance: 10
+  attackMarchDistance: 15
   speed: 5
   turnSmoothTime: 0.1
+  gravityMultiplier: 3
 --- !u!1 &44238225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,8 +1391,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.654531, y: 2.0000005, z: 2}
-  m_Center: {x: -0.31203884, y: 0.00000044885678, z: 0.00000009400516}
+  m_Size: {x: 4.643921, y: 1.9098289, z: 2}
+  m_Center: {x: -0.25892547, y: 0.06908796, z: 0.000000082998156}
 --- !u!1 &5702055599042842535
 GameObject:
   m_ObjectHideFlags: 0
