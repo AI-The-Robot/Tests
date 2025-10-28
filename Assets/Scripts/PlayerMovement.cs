@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         PlayerInput.OnMove += GetInput;
-        PlayerInput.OnAttack += AttackMove;
     }
     private void Start()
     {
