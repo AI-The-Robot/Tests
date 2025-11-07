@@ -74,10 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        if (_input.sqrMagnitude >= 0.1f)
-        {
-            _controller.Move(_movDirection * (speed * Time.deltaTime));
-        }
+       _controller.Move(_movDirection * (speed * Time.deltaTime));
     }
 
     void AttackMove()
