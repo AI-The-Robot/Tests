@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2904788796533588671
+--- !u!114 &-5364785899415385954
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword Trail
-  m_Shader: {fileID: -6465566751694194690, guid: f7e7258fbedf09a4ca81da8f9a00e97c, type: 3}
+  m_Name: New Material
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +30,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -77,30 +78,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_61749d39895d4406a13633fde56335e0_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: ba9abf12075ba71498835aee8b47b17f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_6eb657684ba94945a9e5add3422d4b5b_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: ba9abf12075ba71498835aee8b47b17f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_8816a4767c204465af9877ecf20ace32_Texture_1_Texture2D:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_9c7c5e17d09c4c09a2e56275a7930734_Texture_1_Texture2D:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_c768713a9076425ba1ea41d42efd2027_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 70f98fbd83de1b2468d7b35123b58d92, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_c968c7ce38b94e9f9df4721bddf655fb_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 70f98fbd83de1b2468d7b35123b58d92, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -131,22 +108,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve_Amount: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FadeAmount: 0
-    - _Float: 0.89
-    - _Flow_rate: 1.28
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Highlight: 0
     - _Metallic: 0
-    - _Noise_Scale: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -155,24 +125,12 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Taper_amount: 0
-    - _Voronoi_Dissolve: 2
-    - _Voronoi_Scale: 6
-    - _Voronoi_Speed: 5
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _dissolve_ammount: 2.89
-    - _fall_off_amount: 0
-    - _max: 0.2
-    - _min: 0
-    - _noise_Scale: 5
-    - _radius: 1
     m_Colors:
-    - _Base: {r: 2, g: 0.25714117, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Highlight: {r: 2.9960785, g: 2.4636889, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -4,14 +4,16 @@ using UnityEngine.VFX;
 
 public class PlayerAnimation : MonoBehaviour
 {
+   PlayerInputHandler _playerInputHandler;
    public Animator animator;
-   public VisualEffect  effect;
-   private float SlashRotationSpeed= 20;
+   public VisualEffect effect;
+   public Transform VfxTransform;
    bool isRight;
 
    void Awake()
    {
-      PlayerInput.OnAttack += Swing;
+      _playerInputHandler = GetComponent<PlayerInputHandler>();
+      _playerInputHandler.OnAttack += Swing;
       isRight = true;
    }
 
@@ -30,13 +32,13 @@ public class PlayerAnimation : MonoBehaviour
 
    void PlaySlash()
    {
-      if(isRight) effect.SetFloat("Rotation Velocity",SlashRotationSpeed);
-      else effect.SetFloat("Rotation Velocity", -SlashRotationSpeed);
+      if (isRight) VfxTransform.localScale = new Vector3(-1, 1, 1);
+      else VfxTransform.localScale = new Vector3(1, 1, 1);
       effect?.Play();
    }
 
    private void OnDisable()
    {
-      PlayerInput.OnAttack-= Swing;
+      _playerInputHandler.OnAttack-= Swing;
    }
 }

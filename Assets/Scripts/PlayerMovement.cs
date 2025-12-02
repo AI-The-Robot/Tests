@@ -1,16 +1,18 @@
-using System;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController _controller;
+    private PlayerInputHandler _playerInputHandler;
     private Vector2 _input;
     private float _horizontal, _vertical;
     private Vector3 _movDirection;
     [SerializeField] private float attackMarchDistance;
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
+    private float _turnSmoothVelocity;
     
     //Gravity
     [Header("Gravity Settings")]
@@ -20,19 +22,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        PlayerInput.OnMove += GetInput;
-    }
-    private void Start()
-    {
+        _playerInputHandler = GetComponent<PlayerInputHandler>();
+        _playerInputHandler.OnMove += GetInput;
+        _playerInputHandler.OnAttack += AttackMove;
         _controller = GetComponent<CharacterController>();
     }
     
     private void Update()
     {
-        ApplyGravity();
+        
         CalculateDirection();
-        RotatePlayer();
-        MovePlayer();
+        
+        if (IsServer)
+        {
+            MovePlayer(_movDirection);
+            RotatePlayer();
+            ApplyGravity();
+        }
+        else if (IsClient && IsOwner)
+        {
+            MovePlayerServerRpc(_movDirection);
+            RotatePlayerServerRpc(_movDirection,_input);
+        }
     }
 
     void ApplyGravity()
@@ -49,10 +60,10 @@ public class PlayerMovement : MonoBehaviour
         _movDirection.y = _velocity;
     }
     
-    void GetInput(float horizontal, float vertical)
+    void GetInput(Vector2 input)
     {
-        _horizontal = horizontal;
-        _vertical = vertical;
+        _horizontal = input.x;
+        _vertical = input.y;
     }
 
     void CalculateDirection()
@@ -66,25 +77,43 @@ public class PlayerMovement : MonoBehaviour
         if (_input.sqrMagnitude >= 0.1f)
         {
             float targetAngle= Mathf.Atan2(_movDirection.x, _movDirection.z) * Mathf.Rad2Deg;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref _turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0, angle,0);
+        }
+        
+    }
+    [ServerRpc]
+    void RotatePlayerServerRpc(Vector3 direction,Vector2 input)
+    {
+        if (input.sqrMagnitude >= 0.1f)
+        {
+            float targetAngle= Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref _turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0, angle,0);
         }
         
     }
 
-    void MovePlayer()
+    [Rpc(SendTo.Server)]
+    void MovePlayerServerRpc(Vector3 movDirection)
     {
-       _controller.Move(_movDirection * (speed * Time.deltaTime));
+       _controller.Move(movDirection * (speed * Time.deltaTime));
+    }
+    
+    void MovePlayer(Vector3 movDirection)
+    {
+        _controller.Move(movDirection*(speed*Time.deltaTime));
     }
 
     void AttackMove()
     {
-        _controller.Move(gameObject.transform.forward * (Time.deltaTime * attackMarchDistance));
+        _controller.Move(transform.forward * (Time.deltaTime * attackMarchDistance));
+        Debug.Log($"Player {OwnerClientId} Attacked");
     }
 
     private void OnDisable()
     {
-        PlayerInput.OnMove -= GetInput;
-        PlayerInput.OnAttack -= AttackMove;
+        _playerInputHandler.OnMove -= GetInput;
+        _playerInputHandler.OnAttack -= AttackMove;
     }
 }
